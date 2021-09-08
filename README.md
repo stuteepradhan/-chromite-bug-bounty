@@ -47,6 +47,7 @@
 2. Functions should be exhaustive with respect to every possible combination of the dependency values. Hence WARL functions which can’t be represented by the syntax defined should    be non-exhaustive.
 
 3. The performance counters a processor/core must have are:
+
    a) Processor time
    
    b) Privileged time
