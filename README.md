@@ -40,6 +40,52 @@
  
 4. Within the 32-bit instruction format, we can add __18__ more instructions. 11 instructions are already in use and 3 are reserved. 
 
+## Week-2
+
+1. The minimum number of CSRs required for implementation is 0 for a small core and 4 for a general purpose 64-bit core.
+
+2. Functions should be exhaustive with respect to every possible combination of the dependency values. Hence WARL functions which can’t be represented by the syntax defined should    be non-exhaustive.
+
+3. The performance counters a processor/core must have are:
+   a) Processor time
+   
+   b) Privileged time
+   
+   c) User time
+   
+   d) Queue Length
+   
+   e) Current Disk Queue Length
+   
+   f) Idle Time
+   
+   g) Avg. Disk sec/Read
+   
+   h) Disk Reads/sec
+   
+   i) Available MBs
+   
+   j) Pages/sec and Paging file usage
+   
+4. Paging is the main mechanism used to provide user mode with the illusion of having an AEE -- like most things in computer architecture, it turns out that memory is the            difficult part. The following are the kew points to be kept in mind while designing RISC-V's supervisor virtual memory interface:
+   
+   a)Pages are 4KiB at the leaf node, and it's possible to map large contiguous regions with every level of the page table.
+   
+   b)RV32I-based systems can have up to 34-bit physical addresses with a three level page table.
+   
+   c)RV64I-based systems can have multiple virtual address widths, starting with 39-bit and extending up to 64-bit in increments of 9 bits.
+   
+   d)Mappings must be synchronized via the sfence.vma instruction.
+     
+   e)There are bits for global mappings, supervisor-only, read/write/execute, and accessed/dirty.
+
+   f)There is a single valid bit, which allows storing XLEN-1 bits of flags in an otherwise unused page tables. Additionally, there are two bits of software flags in mapped pages.
+
+   g)Address space identifiers are 9 bits or RV32I and 16 bits on RV64I, and they're a hint so a valid implementation is to ignore them.
+
+   h)The accessed and dirty bits are strongly ordered with respect to accesses from the same hart, but are optional (with a trap-based mechanism when unsupported).
+
+
 
    
    
